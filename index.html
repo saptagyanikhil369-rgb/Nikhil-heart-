@@ -1,55 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Birthday Surprise 🎉</title>
+  <title>DOB भाग्य AI 🔮</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Apni Date of Birth डालकर जानिए आपका जन्म किस वार हुआ था, उम्र, अगला जन्मदिन किस दिन आएगा और AI भाग्य भविष्यवाणी।" />
+  <meta name="keywords" content="DOB day finder, birth day, birthday day, bhagya, numerology, AI prediction" />
 
   <style>
     body{
       margin:0;
-      height:100vh;
+      min-height:100vh;
       display:flex;
-      align-items:center;
       justify-content:center;
-      background:linear-gradient(135deg,#ff4b6e,#ff99ac);
-      font-family:Arial, sans-serif;
+      align-items:center;
+      font-family: Arial, sans-serif;
+      background:linear-gradient(135deg,#0f172a,#6d28d9);
       color:white;
-      text-align:center;
+      padding:18px;
       overflow:hidden;
-      padding:20px;
     }
-
     .card{
-      width:min(520px, 95vw);
-      background:rgba(255,255,255,0.15);
-      border:1px solid rgba(255,255,255,0.25);
-      border-radius:20px;
+      width:min(620px,96vw);
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.22);
+      border-radius:22px;
       padding:22px 18px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.25);
       backdrop-filter: blur(10px);
+      box-shadow:0 12px 35px rgba(0,0,0,0.35);
+      text-align:center;
     }
-
     h1{
-      margin:0 0 12px;
-      font-size:34px;
-      text-shadow:0 0 25px rgba(255,255,255,0.6);
+      margin:0 0 10px;
+      font-size:28px;
+      text-shadow:0 0 20px rgba(255,255,255,0.35);
     }
-
     .sub{
-      font-size:15px;
+      font-size:14px;
       opacity:0.95;
       margin-bottom:18px;
+      line-height:1.6;
     }
-
-    .row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
-      margin-top:12px;
-    }
-
     input{
       width:100%;
       padding:12px 14px;
@@ -57,198 +50,244 @@
       border-radius:12px;
       font-size:16px;
       outline:none;
+      margin-top:10px;
     }
-
-    input[type="text"]{ text-transform: capitalize; }
-
     button{
       width:100%;
+      margin-top:12px;
       padding:12px 14px;
       border:none;
       border-radius:12px;
       font-size:17px;
       cursor:pointer;
       font-weight:bold;
-      background:#ffffff;
-      color:#ff3d64;
       transition:0.2s;
     }
     button:active{ transform:scale(0.98); }
 
+    .btn-main{ background:#ffffff; color:#4c1d95; }
+    .btn-share{ background:#25D366; color:white; display:none; }
+
     .result{
       margin-top:18px;
       padding:14px;
-      border-radius:14px;
-      background:rgba(0,0,0,0.15);
+      border-radius:16px;
+      background:rgba(0,0,0,0.20);
       display:none;
+      text-align:left;
     }
 
-    .nameBig{
-      font-size:30px;
-      margin:6px 0 0;
-      letter-spacing:1px;
-      text-shadow:0 0 18px rgba(255,255,255,0.75);
+    .big{
+      font-size:20px;
+      margin:8px 0 12px;
+      font-weight:bold;
+      text-align:center;
     }
 
-    .wish{
-      margin-top:10px;
-      font-size:18px;
-      line-height:1.5;
-    }
-
-    .quote{
-      margin-top:10px;
-      font-size:15px;
-      opacity:0.95;
-      font-style:italic;
-    }
-
-    /* Confetti */
-    .confetti{
-      position:absolute;
-      width:10px;
-      height:14px;
-      top:-20px;
-      animation: fall linear forwards;
-      opacity:0.9;
-    }
-    @keyframes fall{
-      to{ transform: translateY(110vh) rotate(720deg); }
-    }
-
-    /* Small music hint */
-    .hint{
-      margin-top:10px;
+    .tagwrap{ text-align:center; margin-bottom:10px; }
+    .tag{
+      display:inline-block;
+      padding:7px 11px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.16);
+      margin:4px 6px 0 0;
       font-size:13px;
-      opacity:0.95;
+    }
+
+    .fortune{
+      font-size:15px;
+      line-height:1.7;
+      opacity:0.98;
+    }
+
+    .footer{
+      margin-top:12px;
+      font-size:12px;
+      opacity:0.82;
+      text-align:center;
+    }
+
+    .line{
+      height:1px;
+      background:rgba(255,255,255,0.15);
+      margin:12px 0;
     }
   </style>
 </head>
 
 <body>
   <div class="card">
-    <h1>Birthday Surprise 🎂</h1>
-    <div class="sub">Apna naam aur birthday select karo — song + wishes turant mil jayega 🎶</div>
-
-    <div class="row">
-      <input id="name" type="text" placeholder="Enter your name (e.g. Nikhil)" />
-      <input id="bday" type="date" />
+    <h1>DOB भाग्य AI 🔮</h1>
+    <div class="sub">
+      अपना नाम और Date of Birth डालो ✅<br>
+      जन्म का <b>वार</b>, <b>उम्र</b>, <b>अगला Birthday</b> और <b>AI भाग्य</b> तुरंत पाओ ✨
     </div>
 
-    <div class="row">
-      <button onclick="makeWish()">🎉 Wish Me</button>
-    </div>
+    <input id="name" type="text" placeholder="अपना नाम लिखें (Optional)" />
+    <input id="dob" type="date" />
+    <button class="btn-main" onclick="predict()">✨ Check करें</button>
+    <button id="shareBtn" class="btn-share" onclick="shareWhatsApp()">📲 WhatsApp पर Share करें</button>
 
     <div class="result" id="resultBox">
-      <div class="nameBig" id="showName">Happy Birthday!</div>
-      <div class="wish" id="wishText"></div>
-      <div class="quote" id="quoteText"></div>
-      <div class="hint">🔊 Music is playing… (sound on)</div>
+      <div class="big" id="headline"></div>
+
+      <div class="tagwrap" id="tags"></div>
+
+      <div class="line"></div>
+
+      <div class="fortune" id="fortuneText"></div>
+
+      <div class="footer">⚠️ यह prediction केवल fun + motivation के लिए है 😊</div>
     </div>
   </div>
 
   <script>
-    // ✅ Simple Happy Birthday Tune (no external file needed)
-    // WebAudio API: generates melody like birthday song
-    let audioCtx, playing=false;
+    const hindiDays = ["रविवार","सोमवार","मंगलवार","बुधवार","गुरुवार","शुक्रवार","शनिवार"];
 
-    function playBirthdaySong(){
-      if(playing) return;
-      playing=true;
+    const fortuneByDay = {
+      "रविवार": {
+        title: "Leader Energy ☀️ (नेतृत्व)",
+        text: "आपमें नेतृत्व करने की क्षमता होती है। आप अपने फैसले खुद लेते हैं और दूसरों को inspire करते हैं। 2026 में आपका luck growth और respect की तरफ बढ़ेगा।",
+        lucky: { number: 1, color: "Golden / Orange", day: "रविवार" }
+      },
+      "सोमवार": {
+        title: "Creative & Emotional 🌙 (भावनात्मक)",
+        text: "आपका nature caring और creative होता है। आप रिश्तों को importance देते हैं। 2026 में relationships और पढ़ाई/करियर में improvement का योग है।",
+        lucky: { number: 2, color: "White / Silver", day: "सोमवार" }
+      },
+      "मंगलवार": {
+        title: "Brave & Powerful 🔥 (बहादुर)",
+        text: "आप energetic और bold होते हैं। आप मुश्किल हालात में भी घबराते नहीं। 2026 में career और competition के लिए strong time है।",
+        lucky: { number: 9, color: "Red", day: "मंगलवार" }
+      },
+      "बुधवार": {
+        title: "Smart Communicator 🌿 (होशियार)",
+        text: "आप intelligent हैं और जल्दी सीखते हैं। communication, business, tech में आप अच्छा कर सकते हैं। 2026 में नए opportunities मिल सकती हैं।",
+        lucky: { number: 5, color: "Green", day: "बुधवार" }
+      },
+      "गुरुवार": {
+        title: "Wisdom & Luck ✨ (ज्ञान)",
+        text: "आपका nature wise और calm होता है। education और respect के योग strong होते हैं। 2026 में luck आपकी side रहेगा—skills improve करते रहो।",
+        lucky: { number: 3, color: "Yellow", day: "गुरुवार" }
+      },
+      "शुक्रवार": {
+        title: "Love & Attraction 💖 (आकर्षण)",
+        text: "आप charming और artistic होते हैं। beauty/creative work में आपका chance strong है। 2026 में love और financial luck दोनों improve हो सकते हैं।",
+        lucky: { number: 6, color: "Pink", day: "शुक्रवार" }
+      },
+      "शनिवार": {
+        title: "Hard Work & Destiny 🪐 (कर्म)",
+        text: "आप practical और मेहनती होते हैं। success थोड़ा late मिलती है लेकिन strong मिलती है। 2026 में मेहनत का result जरूर दिखेगा।",
+        lucky: { number: 8, color: "Black / Navy", day: "शनिवार" }
+      }
+    };
 
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const notes = [
-        // Happy Birthday melody (freq, duration)
-        [264,0.35],[264,0.35],[297,0.7],[264,0.7],[352,0.7],[330,1.2],
-        [264,0.35],[264,0.35],[297,0.7],[264,0.7],[396,0.7],[352,1.2],
-        [264,0.35],[264,0.35],[528,0.7],[440,0.7],[352,0.7],[330,0.7],[297,1.2],
-        [466,0.35],[466,0.35],[440,0.7],[352,0.7],[396,0.7],[352,1.2]
-      ];
-
-      let t = audioCtx.currentTime + 0.05;
-
-      notes.forEach(([freq, dur])=>{
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = "sine";
-        osc.frequency.value = freq;
-
-        gain.gain.setValueAtTime(0.0001, t);
-        gain.gain.exponentialRampToValueAtTime(0.25, t + 0.02);
-        gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-
-        osc.start(t);
-        osc.stop(t + dur);
-
-        t += dur;
-      });
-
-      setTimeout(()=>{ playing=false; }, 12000);
+    function numerology(dob){
+      const digits = dob.replaceAll("-","").split("").map(Number);
+      let sum = digits.reduce((a,b)=>a+b,0);
+      while(sum > 9){
+        sum = (""+sum).split("").reduce((a,b)=>a+Number(b),0);
+      }
+      return sum;
     }
 
-    // Quotes collection
-    const quotes = [
-      "Aaj ka din tumhare liye special ho! Har khushi tumhare kadam chume ✨",
-      "Zindagi me hamesha muskurate raho, tumhari smile sabse beautiful hai 😊",
-      "May your dreams come true and your year be full of blessings 🌟",
-      "Har saal tum aur bhi zyada kamyab aur khush raho 🎯",
-      "Aaj ka din tumhari life ka best chapter ho 🎊"
-    ];
-
-    function formatDate(d){
-      // yyyy-mm-dd -> dd/mm/yyyy
-      const [y,m,day] = d.split("-");
-      return `${day}/${m}/${y}`;
+    function calcAge(dobVal){
+      const dob = new Date(dobVal);
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+      return age;
     }
 
-    function makeWish(){
+    function nextBirthdayInfo(dobVal){
+      const dob = new Date(dobVal);
+      const today = new Date();
+
+      let next = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+      if (next < today) next = new Date(today.getFullYear()+1, dob.getMonth(), dob.getDate());
+
+      const day = hindiDays[next.getDay()];
+
+      const dd = String(next.getDate()).padStart(2,"0");
+      const mm = String(next.getMonth()+1).padStart(2,"0");
+      const yy = next.getFullYear();
+
+      return { date: `${dd}/${mm}/${yy}`, day };
+    }
+
+    let shareText = "";
+
+    function predict(){
       const name = document.getElementById("name").value.trim();
-      const bday = document.getElementById("bday").value;
+      const dobVal = document.getElementById("dob").value;
 
-      if(!name){
-        alert("Apna naam likho 😊");
-        return;
-      }
-      if(!bday){
-        alert("Birthday date select karo 🎂");
+      if(!dobVal){
+        alert("कृपया Date of Birth select करें 😊");
         return;
       }
 
-      const niceName = name.charAt(0).toUpperCase() + name.slice(1);
+      const d = new Date(dobVal);
+      const bornDay = hindiDays[d.getDay()];
+      const data = fortuneByDay[bornDay];
 
-      // Show result
-      document.getElementById("resultBox").style.display="block";
-      document.getElementById("showName").innerText = `🎉 Happy Birthday, ${niceName}!`;
-      document.getElementById("wishText").innerHTML =
-        `Aaj <b>${formatDate(bday)}</b> ka din tumhare liye bahut special hai!<br>
-         🥳 Tumhari life me hamesha <b>khushiyan</b>, <b>success</b> aur <b>love</b> rahe ❤️`;
+      const lp = numerology(dobVal);
+      const age = calcAge(dobVal);
+      const nextB = nextBirthdayInfo(dobVal);
 
-      // Random quote
-      const q = quotes[Math.floor(Math.random()*quotes.length)];
-      document.getElementById("quoteText").innerText = "💫 Quote: " + q;
+      const displayName = name ? name : "Friend";
 
-      // Play song
-      playBirthdaySong();
+      document.getElementById("headline").innerHTML =
+        `Hi <b>${displayName}</b> 👋<br>
+         आपका जन्म <b>${bornDay}</b> को हुआ था ✅`;
 
-      // Confetti
-      launchConfetti();
+      document.getElementById("tags").innerHTML = `
+        <span class="tag">🎂 उम्र: <b>${age}</b></span>
+        <span class="tag">🔢 Life Number: <b>${lp}</b></span>
+        <span class="tag">🎯 Lucky Number: <b>${data.lucky.number}</b></span>
+        <span class="tag">🎨 Lucky Color: <b>${data.lucky.color}</b></span>
+        <span class="tag">📅 Lucky Day: <b>${data.lucky.day}</b></span>
+        <span class="tag">🎉 Next Birthday: <b>${nextB.date}</b> (${nextB.day})</span>
+      `;
+
+      const aiAdvice =
+        (lp<=3) ? "confidence + नई skills" :
+        (lp<=6) ? "balance + focus" :
+        "discipline + patience";
+
+      const fortune = `
+        <b>${data.title}</b><br><br>
+        ${data.text}<br><br>
+        <b>AI सलाह:</b> आपके life number <b>${lp}</b> के हिसाब से आपके लिए best रहेगा कि आप
+        <b>${aiAdvice}</b> पर काम करें।<br><br>
+        🌟 <b>Next 30 days:</b> एक छोटा goal चुनिए और daily 30 मिनट effort दीजिए—luck boost होगा ✅
+      `;
+
+      document.getElementById("fortuneText").innerHTML = fortune;
+
+      document.getElementById("resultBox").style.display = "block";
+      document.getElementById("shareBtn").style.display = "block";
+
+      // Prepare WhatsApp Share text
+      shareText =
+`🔮 DOB भाग्य AI Result
+👤 नाम: ${displayName}
+🎂 DOB: ${dobVal}
+✅ जन्म वार: ${bornDay}
+🎉 Next Birthday: ${nextB.date} (${nextB.day})
+🔢 Life Number: ${lp}
+🎯 Lucky Number: ${data.lucky.number}
+🎨 Lucky Color: ${data.lucky.color}
+
+✨ Prediction:
+${data.text}
+
+Website: ${window.location.href}`;
     }
 
-    function launchConfetti(){
-      for(let i=0;i<70;i++){
-        const c = document.createElement("div");
-        c.className="confetti";
-        c.style.left = Math.random()*100 + "vw";
-        c.style.animationDuration = (2 + Math.random()*3) + "s";
-        c.style.background = `hsl(${Math.random()*360}, 90%, 60%)`;
-        c.style.transform = `rotate(${Math.random()*360}deg)`;
-        document.body.appendChild(c);
-
-        setTimeout(()=> c.remove(), 6000);
-      }
+    function shareWhatsApp(){
+      const url = "https://wa.me/?text=" + encodeURIComponent(shareText);
+      window.open(url, "_blank");
     }
   </script>
 </body>
