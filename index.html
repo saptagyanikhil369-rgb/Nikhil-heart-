@@ -3,122 +3,253 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nikhil ❤️</title>
+  <title>Birthday Surprise 🎉</title>
 
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      background: linear-gradient(135deg, #ff4b6e, #ff99ac);
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-      color: white;
-      text-align: center;
+    body{
+      margin:0;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg,#ff4b6e,#ff99ac);
+      font-family:Arial, sans-serif;
+      color:white;
+      text-align:center;
+      overflow:hidden;
+      padding:20px;
     }
 
-    h1 {
-      font-size: 60px;
-      margin: 0;
-      letter-spacing: 2px;
-      text-shadow: 0 0 20px rgba(255,255,255,0.5);
+    .card{
+      width:min(520px, 95vw);
+      background:rgba(255,255,255,0.15);
+      border:1px solid rgba(255,255,255,0.25);
+      border-radius:20px;
+      padding:22px 18px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
     }
 
-    p {
-      font-size: 22px;
-      margin-top: 10px;
-      opacity: 0.95;
+    h1{
+      margin:0 0 12px;
+      font-size:34px;
+      text-shadow:0 0 25px rgba(255,255,255,0.6);
     }
 
-    /* Heart shape */
-    .heart {
-      width: 120px;
-      height: 120px;
-      background: red;
-      position: relative;
-      transform: rotate(-45deg);
-      margin-top: 40px;
-      animation: beat 1s infinite;
-      box-shadow: 0 0 30px rgba(255, 0, 0, 0.7);
+    .sub{
+      font-size:15px;
+      opacity:0.95;
+      margin-bottom:18px;
     }
 
-    .heart::before,
-    .heart::after {
-      content: "";
-      width: 120px;
-      height: 120px;
-      background: red;
-      border-radius: 50%;
-      position: absolute;
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:12px;
     }
 
-    .heart::before {
-      top: -60px;
-      left: 0;
+    input{
+      width:100%;
+      padding:12px 14px;
+      border:none;
+      border-radius:12px;
+      font-size:16px;
+      outline:none;
     }
 
-    .heart::after {
-      left: 60px;
-      top: 0;
+    input[type="text"]{ text-transform: capitalize; }
+
+    button{
+      width:100%;
+      padding:12px 14px;
+      border:none;
+      border-radius:12px;
+      font-size:17px;
+      cursor:pointer;
+      font-weight:bold;
+      background:#ffffff;
+      color:#ff3d64;
+      transition:0.2s;
+    }
+    button:active{ transform:scale(0.98); }
+
+    .result{
+      margin-top:18px;
+      padding:14px;
+      border-radius:14px;
+      background:rgba(0,0,0,0.15);
+      display:none;
     }
 
-    @keyframes beat {
-      0%, 100% {
-        transform: rotate(-45deg) scale(1);
-      }
-      50% {
-        transform: rotate(-45deg) scale(1.2);
-      }
+    .nameBig{
+      font-size:30px;
+      margin:6px 0 0;
+      letter-spacing:1px;
+      text-shadow:0 0 18px rgba(255,255,255,0.75);
     }
 
-    /* Floating hearts */
-    .floating-heart {
-      position: absolute;
-      font-size: 25px;
-      animation: floatUp 5s linear infinite;
-      opacity: 0.8;
+    .wish{
+      margin-top:10px;
+      font-size:18px;
+      line-height:1.5;
     }
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) scale(1.8);
-        opacity: 0;
-      }
+    .quote{
+      margin-top:10px;
+      font-size:15px;
+      opacity:0.95;
+      font-style:italic;
+    }
+
+    /* Confetti */
+    .confetti{
+      position:absolute;
+      width:10px;
+      height:14px;
+      top:-20px;
+      animation: fall linear forwards;
+      opacity:0.9;
+    }
+    @keyframes fall{
+      to{ transform: translateY(110vh) rotate(720deg); }
+    }
+
+    /* Small music hint */
+    .hint{
+      margin-top:10px;
+      font-size:13px;
+      opacity:0.95;
     }
   </style>
 </head>
 
 <body>
-  <h1>NIKHIL</h1>
-  <p>Someone searched your name… and found ❤️</p>
+  <div class="card">
+    <h1>Birthday Surprise 🎂</h1>
+    <div class="sub">Apna naam aur birthday select karo — song + wishes turant mil jayega 🎶</div>
 
-  <div class="heart"></div>
+    <div class="row">
+      <input id="name" type="text" placeholder="Enter your name (e.g. Nikhil)" />
+      <input id="bday" type="date" />
+    </div>
+
+    <div class="row">
+      <button onclick="makeWish()">🎉 Wish Me</button>
+    </div>
+
+    <div class="result" id="resultBox">
+      <div class="nameBig" id="showName">Happy Birthday!</div>
+      <div class="wish" id="wishText"></div>
+      <div class="quote" id="quoteText"></div>
+      <div class="hint">🔊 Music is playing… (sound on)</div>
+    </div>
+  </div>
 
   <script>
-    // Create floating hearts
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("floating-heart");
-      heart.innerHTML = "❤️";
+    // ✅ Simple Happy Birthday Tune (no external file needed)
+    // WebAudio API: generates melody like birthday song
+    let audioCtx, playing=false;
 
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+    function playBirthdaySong(){
+      if(playing) return;
+      playing=true;
 
-      document.body.appendChild(heart);
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const notes = [
+        // Happy Birthday melody (freq, duration)
+        [264,0.35],[264,0.35],[297,0.7],[264,0.7],[352,0.7],[330,1.2],
+        [264,0.35],[264,0.35],[297,0.7],[264,0.7],[396,0.7],[352,1.2],
+        [264,0.35],[264,0.35],[528,0.7],[440,0.7],[352,0.7],[330,0.7],[297,1.2],
+        [466,0.35],[466,0.35],[440,0.7],[352,0.7],[396,0.7],[352,1.2]
+      ];
 
-      setTimeout(() => {
-        heart.remove();
-      }, 5000);
+      let t = audioCtx.currentTime + 0.05;
+
+      notes.forEach(([freq, dur])=>{
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = "sine";
+        osc.frequency.value = freq;
+
+        gain.gain.setValueAtTime(0.0001, t);
+        gain.gain.exponentialRampToValueAtTime(0.25, t + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(t);
+        osc.stop(t + dur);
+
+        t += dur;
+      });
+
+      setTimeout(()=>{ playing=false; }, 12000);
     }
 
-    setInterval(createHeart, 300);
+    // Quotes collection
+    const quotes = [
+      "Aaj ka din tumhare liye special ho! Har khushi tumhare kadam chume ✨",
+      "Zindagi me hamesha muskurate raho, tumhari smile sabse beautiful hai 😊",
+      "May your dreams come true and your year be full of blessings 🌟",
+      "Har saal tum aur bhi zyada kamyab aur khush raho 🎯",
+      "Aaj ka din tumhari life ka best chapter ho 🎊"
+    ];
+
+    function formatDate(d){
+      // yyyy-mm-dd -> dd/mm/yyyy
+      const [y,m,day] = d.split("-");
+      return `${day}/${m}/${y}`;
+    }
+
+    function makeWish(){
+      const name = document.getElementById("name").value.trim();
+      const bday = document.getElementById("bday").value;
+
+      if(!name){
+        alert("Apna naam likho 😊");
+        return;
+      }
+      if(!bday){
+        alert("Birthday date select karo 🎂");
+        return;
+      }
+
+      const niceName = name.charAt(0).toUpperCase() + name.slice(1);
+
+      // Show result
+      document.getElementById("resultBox").style.display="block";
+      document.getElementById("showName").innerText = `🎉 Happy Birthday, ${niceName}!`;
+      document.getElementById("wishText").innerHTML =
+        `Aaj <b>${formatDate(bday)}</b> ka din tumhare liye bahut special hai!<br>
+         🥳 Tumhari life me hamesha <b>khushiyan</b>, <b>success</b> aur <b>love</b> rahe ❤️`;
+
+      // Random quote
+      const q = quotes[Math.floor(Math.random()*quotes.length)];
+      document.getElementById("quoteText").innerText = "💫 Quote: " + q;
+
+      // Play song
+      playBirthdaySong();
+
+      // Confetti
+      launchConfetti();
+    }
+
+    function launchConfetti(){
+      for(let i=0;i<70;i++){
+        const c = document.createElement("div");
+        c.className="confetti";
+        c.style.left = Math.random()*100 + "vw";
+        c.style.animationDuration = (2 + Math.random()*3) + "s";
+        c.style.background = `hsl(${Math.random()*360}, 90%, 60%)`;
+        c.style.transform = `rotate(${Math.random()*360}deg)`;
+        document.body.appendChild(c);
+
+        setTimeout(()=> c.remove(), 6000);
+      }
+    }
   </script>
 </body>
 </html>
